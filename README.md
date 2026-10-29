@@ -2,6 +2,10 @@
 
 Offline security-log evidence analysis for a Debian ARM64 VM on Android. The terminal CLI is the supported interface; no graphical desktop, Tk, web server or network connection is required. Verified with Rust 1.85.1: 45 default workspace/all-target tests and eight Python SQL checks pass. See the development log for scoped validation history.
 
+## Architecture
+
+![PocketSOC architecture](docs/architecture-diagram.png)
+
 ## Build from source
 
 Requires Rust/Cargo 1.85 or newer, a C compiler for bundled SQLite, and trusted
