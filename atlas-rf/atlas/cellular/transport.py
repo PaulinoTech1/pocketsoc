@@ -11,6 +11,10 @@ from atlas.ui.console import write_report
 DOMAIN = b'ATLAS-RF authenticated export v1\n'
 
 
+class AuthenticationError(ValueError):
+    """The supplied export does not authenticate under the expected pairing."""
+
+
 def key_bytes(path):
     # Keys must remain in owned private storage, never the shared export directory.
     fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
@@ -41,17 +45,17 @@ def challenge(path):
 
 def unwrap(doc, key_path, nonce):
     if set(doc) != {'kind', 'schema_version', 'signed_json', 'hmac_sha256'} or type(doc.get('schema_version')) is not int or doc.get('schema_version') != 1:
-        raise ValueError('invalid authenticated envelope')
+        raise AuthenticationError('invalid authenticated envelope')
     signed = doc.get('signed_json')
     claimed = doc.get('hmac_sha256')
     if not isinstance(signed, str) or not isinstance(claimed, str) or not re.fullmatch('[0-9a-f]{64}', claimed):
-        raise ValueError('invalid authentication fields')
+        raise AuthenticationError('invalid authentication fields')
     if key_path is None or not isinstance(nonce, str) or not re.fullmatch('[0-9a-f]{64}', nonce):
-        raise ValueError('authenticated export requires private --key and expected --nonce')
+        raise AuthenticationError('authenticated export requires private --key and expected --nonce')
     digest = hmac.new(key_bytes(key_path), DOMAIN + signed.encode('utf-8'), hashlib.sha256).hexdigest()
     if not hmac.compare_digest(digest, claimed):
-        raise ValueError('export authentication failed')
+        raise AuthenticationError('export authentication failed')
     inner = parse(signed)
     if not isinstance(inner, dict) or not isinstance(inner.get('metadata'), dict) or inner['metadata'].get('bridge_nonce') != nonce:
-        raise ValueError('export does not answer expected challenge')
+        raise AuthenticationError('export does not answer expected challenge')
     return inner

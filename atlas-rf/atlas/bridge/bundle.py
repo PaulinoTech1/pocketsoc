@@ -16,6 +16,14 @@ MAX_PAYLOAD = 8 * 1024 * 1024
 MAX_EVENTS = 10_000
 
 
+def has_cellular_session(metadata, observations):
+    statuses = metadata.get('statuses', {})
+    return any(o['kind'] == 'cellular' for o in observations) or (
+        isinstance(statuses, dict) and any(
+            str(k).startswith('cellular') and not (k == 'cellular' and v == 'disabled_by_default')
+            for k, v in statuses.items()))
+
+
 class BridgeError(AtlasError):
     pass
 
@@ -131,8 +139,7 @@ def validate_envelope(envelope, authenticated=False):
         if not observation['source'].startswith(prefix):
             raise BridgeError('source label conflicts with session provenance')
         observations.append(observation)
-    statuses = metadata.get('statuses', {})
-    cellular_session = any(o['kind'] == 'cellular' for o in observations) or (isinstance(statuses, dict) and any(str(k).startswith('cellular') for k in statuses))
+    cellular_session = has_cellular_session(metadata, observations)
     if not metadata["synthetic"] and cellular_session and not authenticated:
         raise BridgeError("real cellular exports require authenticated transport")
     return VerifiedBundle(metadata, observations, digest, len(data), authenticated)

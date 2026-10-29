@@ -12,7 +12,12 @@ def import_export(path, store):
 
 def status(inbox):
     inbox = Path(inbox)
-    return dict(status='UNVERIFIED', transport='finalized-file-export', companion_implemented=False,
+    # Preserve the historical field (verified deployable companion), while making
+    # the independent source/deployment states explicit for existing callers.
+    return dict(status='UNVERIFIED', transport='authenticated-file-inbox', companion_implemented=False,
                 companion_source_available=True, companion_build_verified=False,
+                companion_implementation='KOTLIN_SOURCE_ONLY',
+                companion_deployment='UNVERIFIED', automatic_ingestion_available=True,
+                collection='ANDROID_APP_REQUIRED', sim_state='NOT_INSPECTED',
                 inbox=str(inbox), inbox_visible=inbox.is_dir(),
                 note='Kotlin source exists; APK/build and Android-to-VM transfer remain unverified. No radio access from Debian.')

@@ -139,3 +139,10 @@ A CPU-only quantized model is researched in [docs/ai-investigation.md](docs/ai-i
 The demo is synthetic. Android APK compilation/installation, live radio capture and verified phone-to-Debian telemetry remain incomplete. No Google developer account is required for ATLAS's Debian import/analysis/dashboard features. Device security settings must remain unchanged.
 
 For a fresh desktop checkout, follow ATLAS's installation guide to create its Python environment before using `atlas-rf/scripts/atlas`; the on-device `.venv`, generated demo database and user-level launcher are not bundled.
+
+
+### ATLAS cellular pipeline repair
+
+The [pre-change diagnosis](atlas-rf/docs/cellular-pipeline-diagnosis-20261029.md) traces the native collector, permissions, missing deployment and manual transport gaps. The [repair](atlas-rf/docs/cellular-pipeline-repair-20261029.md) adds optional automatic finalized-folder delivery, foreground authenticated inbox ingestion and explicit default-radio scope when no subscription is active. The SIM stays deliberately paused; no cellular/security settings changes are permitted. Android compilation, deployment and genuine phone-to-Debian acceptance remain unverified.
+
+[Latest validation](atlas-rf/artifacts/cellular-pipeline-validation-20261029/validation.json): 224 tests passed, one existing socket-dependent skip; real terminal dashboard passed. Local protocol tests do not establish hardware integration.

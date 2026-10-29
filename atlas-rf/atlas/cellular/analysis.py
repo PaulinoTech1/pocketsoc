@@ -19,7 +19,9 @@ def fresh_cell(o):
 
 
 def serving(o):
-    return fresh_cell(o) and o.get('registered') is True
+    # A default-manager observation has no stable subscription attribution.
+    # Preserve it as evidence; do not train/compare it as a subscribed serving cell.
+    return fresh_cell(o) and o.get('registered') is True and 'subscription_id' in o
 
 
 def seconds(a, b):

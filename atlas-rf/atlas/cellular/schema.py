@@ -14,6 +14,7 @@ RANGES = {
     'nr_ss_rsrq': (-43, 20), 'nr_ss_sinr': (-23, 40),
 }
 ENUMS = {
+    'subscription_scope': {'default_radio'},
     'cellular_event': {'cell', 'signal', 'subscription', 'service', 'technology', 'connectivity', 'performance'},
     'technology': {'LTE', 'NR', 'OTHER', 'UNKNOWN'},
     'cell_freshness': {'recent', 'cached', 'unknown'},
@@ -57,7 +58,10 @@ def validate_cellular(o):
         if key in o and not re.fullmatch(pattern, o[key], re.ASCII):
             raise ValueError(f'invalid {key}')
     event = o['cellular_event']
-    if event not in {'connectivity', 'performance'} and 'subscription_id' not in o:
+    default_radio = o.get('subscription_scope') == 'default_radio'
+    if default_radio and ('subscription_id' in o or event not in {'cell', 'signal', 'service', 'technology'}):
+        raise ValueError('default radio scope cannot claim a subscription')
+    if event not in {'connectivity', 'performance'} and 'subscription_id' not in o and not default_radio:
         raise ValueError('telephony events require a subscription scope')
     if event in {'cell', 'signal'} and o.get('technology') not in {'LTE', 'NR'}:
         raise ValueError('cell/signal requires LTE or NR')

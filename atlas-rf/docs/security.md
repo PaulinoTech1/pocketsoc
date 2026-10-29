@@ -99,3 +99,8 @@ Android compilation/installation and live permission/GATT/radio testing remain u
 ## Cellular transport addition
 
 Real cellular exports require a private HMAC key and matching per-assessment challenge, checked before bounded envelope validation/import. Keys are never part of observations or telemetry. Private Debian files (0600) and app-private Android preferences hold these transport keys; neither has application-level encryption. Initial trusted provisioning and deletion of transfer copies are operator responsibilities. Unsigned cellular JSONL is accepted only as explicitly labeled synthetic data, not real Android provenance. HMAC does not attest modem truth; logical evidence manifests remain unauthenticated snapshots. Cellular baselines/session metadata participate in retention invalidation. See [cellular documentation](cellular.md) for the acceptance procedure, permissions and outstanding hardware validation.
+
+
+## Optional automatic file intake
+
+`atlas bridge watch` imports only bounded HMAC-authenticated, non-synthetic exports under the expected challenge. The share is never written or acknowledged. This is explicitly started polling, not a listener/daemon or Android attestation. Optional Android folder delivery uses an operator-selected persistent SAF grant and finalized partial-to-export rename. See [pipeline repair](cellular-pipeline-repair-20261029.md) for limits and failure states.

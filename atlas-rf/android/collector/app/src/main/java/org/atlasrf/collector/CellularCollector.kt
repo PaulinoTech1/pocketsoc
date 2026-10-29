@@ -22,6 +22,8 @@ class CellularCollector(private val context: Context, private val session: Radio
     private var subscriptionListener: SubscriptionManager.OnSubscriptionsChangedListener? = null
     private var networkListener: ConnectivityManager.NetworkCallback? = null
     private val activeSubscriptions = mutableSetOf<Int>()
+    private var targets: List<Int?> = emptyList()
+    private var bindingGeneration = 0
     private val cellularNetworks = mutableSetOf<Network>()
     private var cellularListener: ConnectivityManager.NetworkCallback? = null
     private var defaultNetwork: Network? = null
@@ -37,7 +39,11 @@ class CellularCollector(private val context: Context, private val session: Radio
 
     private fun row(event: String, sub: Int? = null): JSONObject = JSONObject()
         .put("cellular_event", event).put("cell_freshness", "unknown")
-        .also { if (sub != null) it.put("subscription_id", sub) }
+        .also {
+            if (sub != null) it.put("subscription_id", sub)
+            else if (event in setOf("cell", "signal", "service", "technology"))
+                it.put("subscription_scope", "default_radio")
+        }
 
     private fun emit(value: JSONObject, measuredNanos: Long? = null) {
         if (running) session.offerCellular(value, measuredNanos)
@@ -49,7 +55,7 @@ class CellularCollector(private val context: Context, private val session: Radio
         val pm = context.packageManager
         session.statuses["cellular:radio_feature"] = pm.hasSystemFeature("android.hardware.telephony.radio.access").toString()
         session.statuses["cellular:subscription_feature"] = pm.hasSystemFeature("android.hardware.telephony.subscription").toString()
-        if (!pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY) || subscriptions == null) {
+        if (!pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
             session.statuses["cellular"] = "telephony_unsupported"; return
         }
         if (!permitted(Manifest.permission.READ_PHONE_STATE)) {
@@ -68,52 +74,64 @@ class CellularCollector(private val context: Context, private val session: Radio
 
     private fun refreshSubscriptions() = attempt("subscriptions") {
         val infos = subscriptions?.activeSubscriptionInfoList.orEmpty().filter { it.subscriptionId >= 0 }
-        if (infos.size > 8) session.statuses["cellular:subscriptions"] = "truncated_to_8"
+        session.statuses["cellular:subscription_limit"] = if (infos.size > 8) "truncated_to_8" else "within_limit"
         val selected = infos.take(8)
         val current = selected.map { it.subscriptionId }.toSet()
         (activeSubscriptions - current).forEach {
             emit(row("subscription", it).put("subscription_status", "inactive"))
         }
         // Rebind only when the set changes; no callback multiplication or periodic active scans.
-        val initial = activeSubscriptions.isEmpty() && registrations.isEmpty()
-        if (current == activeSubscriptions && !initial) return@attempt
+        val nextTargets = CellularTargets.select(selected.map { it.subscriptionId })
+        if (nextTargets == targets) return@attempt
+        bindingGeneration += 1
+        val generation = bindingGeneration
+        targets = nextTargets
         registrations.forEach { (tm, cb) -> attempt("unregister") { tm.unregisterTelephonyCallback(cb) } }
         registrations.clear()
         activeSubscriptions.clear(); activeSubscriptions.addAll(current)
         session.statuses["cellular:active_subscriptions"] = current.size.toString()
-        selected.forEach { info ->
+        session.statuses["cellular:subscriptions"] = if (current.isEmpty()) "none_active_not_a_software_failure" else "active_list_available"
+        if (current.isEmpty()) session.statuses["cellular:default_radio"] = "attempting_public_apis_measurements_not_guaranteed"
+        else session.statuses.remove("cellular:default_radio")
+        targets.forEach { sub ->
+            val info = selected.firstOrNull { it.subscriptionId == sub }
             val base = context.getSystemService(TelephonyManager::class.java)
             if (base == null) { session.statuses["cellular"] = "telephony_service_absent"; return@forEach }
-            val tm = base.createForSubscriptionId(info.subscriptionId)
-            val sub = info.subscriptionId
-            val value = row("subscription", sub).put("subscription_status", "active")
-            if (info.simSlotIndex in 0..7) value.put("slot_index", info.simSlotIndex)
-            val carrier = info.carrierName?.toString().orEmpty()
-            if (carrier.isNotBlank()) value.put("carrier", carrier.take(256))
-            attempt("sim_state:$sub") { if (tm.simState in 0..11) value.put("sim_state", tm.simState) }
-            emit(value)
+            val tm = if (sub == null) base else base.createForSubscriptionId(sub)
+            if (info != null) {
+                val value = row("subscription", sub).put("subscription_status", "active")
+                if (info.simSlotIndex in 0..7) value.put("slot_index", info.simSlotIndex)
+                val carrier = info.carrierName?.toString().orEmpty()
+                if (carrier.isNotBlank()) value.put("carrier", carrier.take(256))
+                attempt("sim_state:$sub") { if (tm.simState in 0..11) value.put("sim_state", tm.simState) }
+                emit(value)
+            }
+            // Late callbacks from a previous binding must not acquire a new attribution.
+            fun emitCurrent(value: JSONObject) {
+                if (generation == bindingGeneration) emit(value)
+            }
             val basic = object : TelephonyCallback(), TelephonyCallback.ServiceStateListener,
                 TelephonyCallback.SignalStrengthsListener, TelephonyCallback.DataConnectionStateListener,
                 TelephonyCallback.DisplayInfoListener {
                 override fun onServiceStateChanged(state: ServiceState) {
-                    emit(row("service", sub).put("service_state", state.state).put("roaming", state.roaming))
+                    emitCurrent(row("service", sub).put("service_state", state.state).put("roaming", state.roaming))
                 }
                 override fun onSignalStrengthsChanged(strength: SignalStrength) {
                     strength.cellSignalStrengths.take(16).forEach { signal ->
-                        signalRow(signal, row("signal", sub))?.let { emit(it) }
+                        signalRow(signal, row("signal", sub))?.let { emitCurrent(it) }
                     }
                 }
                 override fun onDataConnectionStateChanged(state: Int, networkType: Int) {
                     val o = row("technology", sub)
                     if (state in -1..5) o.put("data_state", state)
                     if (networkType in 0..20) o.put("network_type", networkType)
-                    emit(o)
+                    emitCurrent(o)
                 }
                 override fun onDisplayInfoChanged(info: TelephonyDisplayInfo) {
                     val o = row("technology", sub)
                     if (info.networkType in 0..20) o.put("network_type", info.networkType)
                     if (info.overrideNetworkType in 0..10) o.put("display_override", info.overrideNetworkType)
-                    emit(o) // Display override is not a measured NR serving cell.
+                    emitCurrent(o) // Display override is not a measured NR serving cell.
                 }
             }
             attempt("state_callback:$sub") {
@@ -124,23 +142,23 @@ class CellularCollector(private val context: Context, private val session: Radio
                 session.statuses["cellular:cells:$sub"] = "precise_location_permission_and_location_switch_required"
             } else {
                 val cellCallback = object : TelephonyCallback(), TelephonyCallback.CellInfoListener {
-                    override fun onCellInfoChanged(cellInfo: MutableList<CellInfo>) { cells(sub, cellInfo, "callback") }
+                    override fun onCellInfoChanged(cellInfo: MutableList<CellInfo>) { cells(sub, cellInfo, "callback", generation) }
                 }
                 attempt("cell_callback:$sub") {
                     tm.registerTelephonyCallback(context.mainExecutor, cellCallback); registrations.add(tm to cellCallback)
                 }
-                attempt("cached_cells:$sub") { cells(sub, tm.allCellInfo.orEmpty(), "cached_read") }
+                attempt("cached_cells:$sub") { cells(sub, tm.allCellInfo.orEmpty(), "cached_read", generation) }
                 attempt("request_cells:$sub") {
                     session.statuses["cellular:update:$sub"] = "requested_not_guaranteed"
                     tm.requestCellInfoUpdate(context.mainExecutor, object : TelephonyManager.CellInfoCallback() {
                         override fun onCellInfo(cellInfo: MutableList<CellInfo>) {
-                            if (running) {
+                            if (running && generation == bindingGeneration) {
                                 session.statuses["cellular:update:$sub"] = "returned_${cellInfo.size}_cells"
-                                cells(sub, cellInfo, "update")
+                                cells(sub, cellInfo, "update", generation)
                             }
                         }
                         override fun onError(errorCode: Int, detail: Throwable?) {
-                            if (running) session.statuses["cellular:update:$sub"] = "api_error_$errorCode"
+                            if (running && generation == bindingGeneration) session.statuses["cellular:update:$sub"] = "api_error_$errorCode"
                         }
                     })
                 }
@@ -171,8 +189,8 @@ class CellularCollector(private val context: Context, private val session: Radio
         return o
     }
 
-    private fun cells(sub: Int, infos: List<CellInfo>, origin: String) {
-        if (!running || sub !in activeSubscriptions) return
+    private fun cells(sub: Int?, infos: List<CellInfo>, origin: String, generation: Int) {
+        if (!running || generation != bindingGeneration || sub !in targets) return
         if (infos.size > 256) session.statuses["cellular:cells:$sub"] = "truncated_to_256"
         if (infos.isEmpty()) session.statuses["cellular:cells:$sub"] = "empty_not_evidence_of_no_cells"
         infos.take(256).forEach { info ->
@@ -265,6 +283,8 @@ class CellularCollector(private val context: Context, private val session: Radio
 
     fun stop() {
         running = false
+        bindingGeneration += 1
+        targets = emptyList()
         registrations.forEach { (tm, cb) -> attempt("unregister") { tm.unregisterTelephonyCallback(cb) } }
         registrations.clear()
         subscriptionListener?.let { attempt("subscriptions_stop") { subscriptions?.removeOnSubscriptionsChangedListener(it) } }

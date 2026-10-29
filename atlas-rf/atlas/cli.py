@@ -41,6 +41,11 @@ def parser():
             action.add_argument('--nonce')
         if name == 'verify-probe':
             action.add_argument('--nonce', required=True, help='exact nonce displayed by Android app')
+    watch = actions.add_parser('watch', help='automatically ingest authenticated exports; no radio access')
+    watch.add_argument('--inbox', type=Path, help='default: configured bridge.inbox')
+    watch.add_argument('--key', type=Path, required=True)
+    watch.add_argument('--nonce', required=True, help='expected current Debian challenge')
+    watch.add_argument('--once', action='store_true', help='one bounded inbox pass and exit')
     wifi = commands.add_parser('wifi', help='source-scoped Wi-Fi observation intelligence')
     actions = wifi.add_subparsers(dest='wifi_action', required=True)
     scan = actions.add_parser('scan', help='ingest an explicit Android/export file; no direct radio access')
@@ -267,7 +272,25 @@ def main(argv=None):
             for sample in application.monitor(1 if args.once else args.samples, stop=stop):
                 emit(sample)
         elif args.command == 'bridge':
-            if args.bridge_action == 'verify':
+            if args.bridge_action == 'watch':
+                from .bridge.inbox import poll
+                from .core.resources import enforce
+                if threading.current_thread() is threading.main_thread():
+                    for sig in (signal.SIGINT, signal.SIGTERM):
+                        previous[sig] = signal.getsignal(sig)
+                        signal.signal(sig, lambda signum, frame: stop.set())
+                seen = {}
+                while not stop.is_set():
+                    enforce(application.resources.sample(config.storage.path), config.monitor)
+                    result = poll(args.inbox or config.bridge.inbox, config.storage.path,
+                                  args.key, args.nonce, seen)
+                    emit(result)
+                    if args.once:
+                        if result['rejected'] or result['transport'] in {'INBOX_UNAVAILABLE', 'INBOX_LIMIT_EXCEEDED'}:
+                            return 2
+                        break
+                    stop.wait(config.monitor.interval_seconds)
+            elif args.bridge_action == 'verify':
                 emit(read_bundle(args.file, args.key, args.nonce).summary())
             elif args.bridge_action == 'verify-probe':
                 emit(verify_probe(args.file, args.nonce))

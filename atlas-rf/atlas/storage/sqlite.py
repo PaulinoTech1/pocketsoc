@@ -78,8 +78,8 @@ class Store:
         import hashlib
         from atlas.core.events import now
         cells = [o for o in bundle.observations if o['kind'] == 'cellular']
-        statuses = bundle.metadata.get('statuses', {})
-        cellular_session = bool(cells) or (isinstance(statuses, dict) and any(str(k).startswith('cellular') for k in statuses))
+        from atlas.bridge.bundle import has_cellular_session
+        cellular_session = has_cellular_session(bundle.metadata, bundle.observations)
         if not cellular_session:
             return self.add(bundle.observations)
         metadata = {k: bundle.metadata[k] for k in ('session_id', 'synthetic', 'statuses', 'drops',

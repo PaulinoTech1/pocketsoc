@@ -82,6 +82,18 @@ class MainActivity : Activity() {
         }
         button("Import bridge key (trusted private document transfer)") { chooseCellularDocument(202) }
         button("Import current Debian bridge challenge") { chooseCellularDocument(203) }
+        button("Choose automatic delivery folder (paired sessions only)") { chooseDeliveryDirectory() }
+        button("Disable automatic folder delivery") {
+            if (session == null && !ioBusy && !pickerOpen) {
+                val prefs = getSharedPreferences("delivery", MODE_PRIVATE)
+                prefs.getString("tree", null)?.let { saved ->
+                    runCatching { contentResolver.releasePersistableUriPermission(Uri.parse(saved),
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
+                }
+                prefs.edit().remove("tree").apply()
+                text.text = "Automatic delivery disabled. Manual finalized export remains available."
+            }
+        }
         button("Open authorized Wi-Fi / cellular HTTPS test request") { chooseCellularDocument(204) }
         startButton = button("Start 15-second session (replaces displayed session)") { startSession() }
         button("Stop and finalize") { stopSession("user_stop") }
@@ -132,16 +144,25 @@ class MainActivity : Activity() {
         wifi = null; ble = null; cellular = null; networkTest = null
         active.statuses.putIfAbsent("session", reason)
         active.stopAccepting()
+        val deliveryTree = getSharedPreferences("delivery", MODE_PRIVATE).getString("tree", null)
         ioBusy = true
         text.text = "Finalizing bounded queue…"
         io.execute {
             val result = runCatching { active.finish() }
+            val delivery = if (deliveryTree != null && result.isSuccess) {
+                runCatching { DirectoryDelivery.deliver(this, result.getOrThrow(), Uri.parse(deliveryTree)) }
+            } else null
             handler.post {
                 ioBusy = false
                 if (!isDestroyed) {
                     result.onSuccess {
                         finalized = it
-                        text.text = "Finalized ${active.written.get()} real observations.\n${active.statuses}\nExport explicitly; no data has been sent yet."
+                        val deliveryStatus = when {
+                            delivery?.isSuccess == true -> "Folder delivery completed. Debian verification/ingestion still required."
+                            delivery?.isFailure == true -> "Folder delivery failed (grant/provider/authentication). Private export retained; retry manually."
+                            else -> "Manual export required; no delivery folder is configured."
+                        }
+                        text.text = "Finalized ${active.written.get()} API observations.\n${active.statuses}\n$deliveryStatus"
                     }.onFailure { text.text = "Finalization failed; no complete export available." }
                     startButton.isEnabled = true
                     exportButton.isEnabled = finalized != null
@@ -291,6 +312,16 @@ class MainActivity : Activity() {
         gattInspector?.start()
     }
 
+    private fun chooseDeliveryDirectory() {
+        if (session != null || ioBusy || pickerOpen) return
+        pickerOpen = true
+        @Suppress("DEPRECATION")
+        startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE).apply {
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION or
+                Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION)
+        }, 205)
+    }
+
     private fun chooseExport(mode: String) {
         if (session != null || ioBusy || pickerOpen || (mode == "telemetry" && finalized == null)) return
         exportMode = mode
@@ -312,6 +343,29 @@ class MainActivity : Activity() {
     @Deprecated("Platform callback retained to avoid an AndroidX runtime dependency")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 205) {
+            pickerOpen = false
+            val uri = data?.data
+            if (resultCode != RESULT_OK || uri == null) {
+                text.text = "Delivery folder selection cancelled."; return
+            }
+            try {
+                val flags = (data?.flags ?: 0) and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                check(flags and Intent.FLAG_GRANT_WRITE_URI_PERMISSION != 0)
+                contentResolver.takePersistableUriPermission(uri, flags)
+                val prefs = getSharedPreferences("delivery", MODE_PRIVATE)
+                val old = prefs.getString("tree", null)
+                prefs.edit().putString("tree", uri.toString()).apply()
+                if (old != null && old != uri.toString()) runCatching {
+                    contentResolver.releasePersistableUriPermission(Uri.parse(old),
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                }
+                text.text = "Automatic delivery configured for explicitly started paired sessions. Choose a local folder visible in Debian. No collection has started."
+            } catch (_: Exception) {
+                text.text = "Delivery folder permission unavailable. Manual export remains available."
+            }
+            return
+        }
         if (requestCode in 202..204) {
             pickerOpen = false
             if (resultCode == RESULT_OK && data?.data != null) receiveCellularDocument(data.data!!, requestCode)

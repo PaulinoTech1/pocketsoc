@@ -30,6 +30,10 @@ The demo is entirely synthetic. It imports 55 invented records, creates a five-A
 
 Demo artifacts include `results.json`, `baseline.json`, `evidence.json`, `evidence-manifest.json`, `report.md`, `dashboard.txt`, fixture JSONL files and separate demo/benchmark databases. Keep them separate from real observations. Packaged fixture data is in [atlas/fixtures/prototype.json](atlas/fixtures/prototype.json); regenerate from the original controlled scenarios with `.venv/bin/python examples/prototype/generate.py`.
 
+## Cellular pipeline diagnosis and repair
+
+The [root cause](docs/cellular-pipeline-diagnosis-20261029.md) was recorded before changes. [Repair details](docs/cellular-pipeline-repair-20261029.md) cover optional automatic folder delivery, `atlas bridge watch`, no-active-subscription public-API attempts and separate permission/transport/measurement states. The operator's SIM remains paused. Android changes are source-only until built/deployed; no live integration is claimed.
+
 ## Cellular extension
 
 `atlas cellular` adds SQLite history, reviewed baselines, serving-cell/channel changes, LTE↔NR monitoring, signal trends, connectivity interruption hints and Wi-Fi/cellular comparison of explicit Android-bound HTTPS tests. It reuses the existing event validator, storage, logging, reports, topology, evidence and dashboard (`5` selects cellular).
