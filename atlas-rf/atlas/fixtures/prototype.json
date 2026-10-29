@@ -1,0 +1,1373 @@
+{
+  "accuracy_cases": [
+    {
+      "case_id": "wifi.security-downgrade:mismatch",
+      "expected_alert": true,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        },
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.security-downgrade"
+    },
+    {
+      "case_id": "wifi.security-downgrade:approved",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:01",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA3",
+          "source": "synthetic:detection:wifi"
+        },
+        {
+          "id": "02:aa:bb:cc:00:01",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA3",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.security-downgrade"
+    },
+    {
+      "case_id": "wifi.security-downgrade:expired",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T09:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        },
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T09:00:30Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.security-downgrade"
+    },
+    {
+      "case_id": "wifi.security-downgrade:insufficient",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.security-downgrade"
+    },
+    {
+      "case_id": "wifi.unrecognized-bssid:mismatch",
+      "expected_alert": true,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        },
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.unrecognized-bssid"
+    },
+    {
+      "case_id": "wifi.unrecognized-bssid:approved",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:01",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA3",
+          "source": "synthetic:detection:wifi"
+        },
+        {
+          "id": "02:aa:bb:cc:00:01",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA3",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.unrecognized-bssid"
+    },
+    {
+      "case_id": "wifi.unrecognized-bssid:expired",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T09:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        },
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T09:00:30Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.unrecognized-bssid"
+    },
+    {
+      "case_id": "wifi.unrecognized-bssid:insufficient",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "02:aa:bb:cc:00:02",
+          "kind": "wifi",
+          "name": "Atlas Lab",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -50,
+          "scan_age_ms": 100,
+          "scan_freshness": "fresh",
+          "security": "WPA2",
+          "source": "synthetic:detection:wifi"
+        }
+      ],
+      "rule_id": "wifi.unrecognized-bssid"
+    },
+    {
+      "case_id": "ble.monitored-services:mismatch",
+      "expected_alert": true,
+      "observations": [
+        {
+          "advertisement_complete": true,
+          "evidence_confidence": "synthetic",
+          "id": "c2:11:22:33:44:01",
+          "kind": "ble",
+          "name": "Synthetic beacon",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -60,
+          "service_uuids": [
+            "180f",
+            "181a"
+          ],
+          "source": "synthetic:detection:ble"
+        },
+        {
+          "advertisement_complete": true,
+          "evidence_confidence": "synthetic",
+          "id": "c2:11:22:33:44:01",
+          "kind": "ble",
+          "name": "Synthetic beacon",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "rssi": -60,
+          "service_uuids": [
+            "180f",
+            "181a"
+          ],
+          "source": "synthetic:detection:ble"
+        }
+      ],
+      "rule_id": "ble.monitored-services"
+    },
+    {
+      "case_id": "ble.monitored-services:approved",
+      "expected_alert": false,
+      "observations": [
+        {
+          "advertisement_complete": true,
+          "evidence_confidence": "synthetic",
+          "id": "c2:11:22:33:44:01",
+          "kind": "ble",
+          "name": "Synthetic beacon",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -60,
+          "service_uuids": [
+            "180f"
+          ],
+          "source": "synthetic:detection:ble"
+        },
+        {
+          "advertisement_complete": true,
+          "evidence_confidence": "synthetic",
+          "id": "c2:11:22:33:44:01",
+          "kind": "ble",
+          "name": "Synthetic beacon",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "rssi": -60,
+          "service_uuids": [
+            "180f"
+          ],
+          "source": "synthetic:detection:ble"
+        }
+      ],
+      "rule_id": "ble.monitored-services"
+    },
+    {
+      "case_id": "ble.monitored-services:expired",
+      "expected_alert": false,
+      "observations": [
+        {
+          "advertisement_complete": true,
+          "evidence_confidence": "synthetic",
+          "id": "c2:11:22:33:44:01",
+          "kind": "ble",
+          "name": "Synthetic beacon",
+          "observed_at": "2026-04-17T09:00:20Z",
+          "rssi": -60,
+          "service_uuids": [
+            "180f",
+            "181a"
+          ],
+          "source": "synthetic:detection:ble"
+        },
+        {
+          "advertisement_complete": true,
+          "evidence_confidence": "synthetic",
+          "id": "c2:11:22:33:44:01",
+          "kind": "ble",
+          "name": "Synthetic beacon",
+          "observed_at": "2026-04-17T09:00:30Z",
+          "rssi": -60,
+          "service_uuids": [
+            "180f",
+            "181a"
+          ],
+          "source": "synthetic:detection:ble"
+        }
+      ],
+      "rule_id": "ble.monitored-services"
+    },
+    {
+      "case_id": "ble.monitored-services:insufficient",
+      "expected_alert": false,
+      "observations": [
+        {
+          "advertisement_complete": true,
+          "evidence_confidence": "synthetic",
+          "id": "c2:11:22:33:44:01",
+          "kind": "ble",
+          "name": "Synthetic beacon",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "rssi": -60,
+          "service_uuids": [
+            "180f",
+            "181a"
+          ],
+          "source": "synthetic:detection:ble"
+        }
+      ],
+      "rule_id": "ble.monitored-services"
+    },
+    {
+      "case_id": "network.management-interface:mismatch",
+      "expected_alert": true,
+      "observations": [
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        },
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.management-interface"
+    },
+    {
+      "case_id": "network.management-interface:approved",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "192.0.2.5/tcp/443",
+          "ip": "192.0.2.5",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "port": 443,
+          "source": "synthetic:detection:network"
+        },
+        {
+          "id": "192.0.2.5/tcp/443",
+          "ip": "192.0.2.5",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "port": 443,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.management-interface"
+    },
+    {
+      "case_id": "network.management-interface:expired",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T09:00:20Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        },
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T09:00:30Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.management-interface"
+    },
+    {
+      "case_id": "network.management-interface:insufficient",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.management-interface"
+    },
+    {
+      "case_id": "network.exposure:mismatch",
+      "expected_alert": true,
+      "observations": [
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        },
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.exposure"
+    },
+    {
+      "case_id": "network.exposure:approved",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "192.0.2.5/tcp/443",
+          "ip": "192.0.2.5",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "port": 443,
+          "source": "synthetic:detection:network"
+        },
+        {
+          "id": "192.0.2.5/tcp/443",
+          "ip": "192.0.2.5",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:30Z",
+          "port": 443,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.exposure"
+    },
+    {
+      "case_id": "network.exposure:expired",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T09:00:20Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        },
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T09:00:30Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.exposure"
+    },
+    {
+      "case_id": "network.exposure:insufficient",
+      "expected_alert": false,
+      "observations": [
+        {
+          "id": "192.0.2.55/tcp/22",
+          "ip": "192.0.2.55",
+          "kind": "service",
+          "observed_at": "2026-04-17T10:00:20Z",
+          "port": 22,
+          "source": "synthetic:detection:network"
+        }
+      ],
+      "rule_id": "network.exposure"
+    }
+  ],
+  "ble_evaluation": [
+    {
+      "advertisement_complete": true,
+      "advertisement_hex": "020106050309180f180f0941746c6173426561636f6e2d763205ffffff0200",
+      "connectable": false,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "0200"
+      },
+      "name": "AtlasBeacon-v2",
+      "observed_at": "2026-04-16T10:03:10Z",
+      "rssi": -64,
+      "service_uuids": [
+        "1809",
+        "180f"
+      ],
+      "source": "synthetic:android-ble:lab"
+    },
+    {
+      "advertisement_complete": true,
+      "advertisement_hex": "020106030309180c0941746c6173426561636f6e05ffffff0100",
+      "connectable": true,
+      "evidence_confidence": "synthetic",
+      "id": "62:ab:cd:ef:00:02",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "0100"
+      },
+      "name": "AtlasBeacon",
+      "observed_at": "2026-04-16T10:03:20Z",
+      "rssi": -64,
+      "service_uuids": [
+        "1809"
+      ],
+      "source": "synthetic:android-ble:lab"
+    },
+    {
+      "advertisement_complete": false,
+      "advertisement_hex": "0201060c0941746c6173426561636f6e05ffffff0100",
+      "connectable": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "0100"
+      },
+      "name": "AtlasBeacon",
+      "observed_at": "2026-04-16T10:03:30Z",
+      "rssi": -64,
+      "service_uuids": [],
+      "source": "synthetic:android-ble:lab"
+    },
+    {
+      "advertisement_complete": true,
+      "advertisement_hex": "020106030309180c0941746c6173426561636f6e05ffffff0100",
+      "connectable": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "0100"
+      },
+      "name": "AtlasBeacon",
+      "observed_at": "2026-04-16T10:03:40Z",
+      "rssi": -64,
+      "service_uuids": [
+        "1809"
+      ],
+      "source": "synthetic:android-ble:lab"
+    },
+    {
+      "authorization_id": "766d5b9e-05d6-4e3b-b375-ee44deed2cce",
+      "evidence_confidence": "synthetic",
+      "gatt_services": [],
+      "gatt_status": "failed",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble_gatt",
+      "observed_at": "2026-04-16T10:03:50Z",
+      "operation": "discover_services",
+      "pairing_initiated": false,
+      "source": "synthetic:android-ble:lab",
+      "writes_performed": false
+    },
+    {
+      "authorization_id": "cf6d021f-c3bc-4ecd-9b39-7b91cfe04ab4",
+      "evidence_confidence": "synthetic",
+      "gatt_services": [
+        {
+          "characteristics": [
+            {
+              "properties": 2,
+              "uuid": "2a1c"
+            }
+          ],
+          "uuid": "1809"
+        },
+        {
+          "characteristics": [
+            {
+              "properties": 2,
+              "uuid": "2a19"
+            }
+          ],
+          "uuid": "180f"
+        }
+      ],
+      "gatt_status": "complete",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble_gatt",
+      "observed_at": "2026-04-16T10:04:00Z",
+      "operation": "discover_services",
+      "pairing_initiated": false,
+      "source": "synthetic:android-ble:lab",
+      "writes_performed": false
+    },
+    {
+      "advertisement_complete": true,
+      "advertisement_hex": "020106030309181509446966666572656e74206164766572746973657205ffffffffff",
+      "connectable": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "ffff"
+      },
+      "name": "Different advertiser",
+      "observed_at": "2026-04-16T10:20:00Z",
+      "rssi": -64,
+      "service_uuids": [
+        "1809"
+      ],
+      "source": "synthetic:android-ble:lab"
+    }
+  ],
+  "ble_since": "2026-04-16T10:03:00Z",
+  "ble_source": "synthetic:android-ble:lab",
+  "ble_training": [
+    {
+      "advertisement_complete": true,
+      "advertisement_hex": "020106030309180c0941746c6173426561636f6e05ffffff0100",
+      "connectable": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "0100"
+      },
+      "name": "AtlasBeacon",
+      "observed_at": "2026-04-16T10:00:00Z",
+      "rssi": -64,
+      "service_uuids": [
+        "1809"
+      ],
+      "source": "synthetic:android-ble:lab"
+    },
+    {
+      "advertisement_complete": true,
+      "advertisement_hex": "020106030309180c0941746c6173426561636f6e05ffffff0100",
+      "connectable": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "0100"
+      },
+      "name": "AtlasBeacon",
+      "observed_at": "2026-04-16T10:01:00Z",
+      "rssi": -64,
+      "service_uuids": [
+        "1809"
+      ],
+      "source": "synthetic:android-ble:lab"
+    },
+    {
+      "advertisement_complete": true,
+      "advertisement_hex": "020106030309180c0941746c6173426561636f6e05ffffff0100",
+      "connectable": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "manufacturer_data": {
+        "65535": "0100"
+      },
+      "name": "AtlasBeacon",
+      "observed_at": "2026-04-16T10:02:00Z",
+      "rssi": -64,
+      "service_uuids": [
+        "1809"
+      ],
+      "source": "synthetic:android-ble:lab"
+    },
+    {
+      "authorization_id": "766d5b9e-05d6-4e3b-b375-ee44deed2cce",
+      "evidence_confidence": "synthetic",
+      "gatt_services": [
+        {
+          "characteristics": [
+            {
+              "properties": 18,
+              "uuid": "2a1c"
+            }
+          ],
+          "uuid": "1809"
+        }
+      ],
+      "gatt_status": "complete",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble_gatt",
+      "observed_at": "2026-04-16T10:02:30Z",
+      "operation": "discover_services",
+      "pairing_initiated": false,
+      "source": "synthetic:android-ble:lab",
+      "writes_performed": false
+    }
+  ],
+  "clock": "2026-04-17T10:01:00Z",
+  "description": "Invented observations and reviewed expectation labels, not hardware or field accuracy.",
+  "expected_ble_rules": [
+    "new-advertising-services",
+    "unexpected-advertisement-configuration",
+    "advertised-capabilities-added",
+    "known-gatt-capabilities-changed"
+  ],
+  "expected_policy_rules": [
+    "wifi.security-downgrade",
+    "wifi.unrecognized-bssid",
+    "ble.monitored-services",
+    "network.management-interface",
+    "network.exposure"
+  ],
+  "expected_wifi_rules": {
+    "suspicious-ssid-duplication": 1,
+    "unexpected-security-change": 1,
+    "unknown-bssid": 4,
+    "unseen-ssid": 2,
+    "unusual-channel-change": 1
+  },
+  "format": "atlas-controlled-demo/v1",
+  "network_observations": [
+    {
+      "id": "192.0.2.55",
+      "interface": "fixture0",
+      "ip": "192.0.2.55",
+      "kind": "neighbor",
+      "mac": "02:11:22:00:00:01",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "source": "synthetic:detection:network"
+    },
+    {
+      "gateway": "192.0.2.1",
+      "id": "192.0.2.0/24@fixture0",
+      "interface": "fixture0",
+      "kind": "route",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "source": "synthetic:detection:network"
+    }
+  ],
+  "policy": {
+    "defaults": {
+      "cooldown_seconds": 3600,
+      "max_age_seconds": 600,
+      "min_observations": 2,
+      "window_seconds": 300
+    },
+    "rules": [
+      {
+        "confidence": "medium",
+        "expected_security": "WPA3",
+        "id": "wifi.security-downgrade",
+        "investigation": "Verify the AP configuration and negotiated security with the network owner.",
+        "severity": "high",
+        "sources": [
+          "synthetic:detection:wifi"
+        ],
+        "ssid": "Atlas Lab",
+        "type": "ap-security-downgrade"
+      },
+      {
+        "approved_bssids": [
+          "02:aa:bb:cc:00:01"
+        ],
+        "confidence": "low",
+        "id": "wifi.unrecognized-bssid",
+        "investigation": "Compare the BSSID with the approved AP inventory and account for replacements or mesh nodes.",
+        "severity": "medium",
+        "sources": [
+          "synthetic:detection:wifi"
+        ],
+        "ssid": "Atlas Lab",
+        "type": "unrecognized-bssid"
+      },
+      {
+        "address": "c2:11:22:33:44:01",
+        "confidence": "low",
+        "evidence_kind": "advertisement",
+        "expected_services": [
+          "180f"
+        ],
+        "id": "ble.monitored-services",
+        "investigation": "Check authorized service metadata and address rotation before attributing this to a device.",
+        "severity": "medium",
+        "sources": [
+          "synthetic:detection:ble"
+        ],
+        "type": "ble-service-change"
+      },
+      {
+        "allowed_networks": [
+          "192.0.2.0/28"
+        ],
+        "confidence": "medium",
+        "id": "network.management-interface",
+        "investigation": "Identify the responding service and check whether the endpoint is approved for management access.",
+        "ports": [
+          22,
+          23,
+          3389,
+          5900,
+          8443
+        ],
+        "severity": "high",
+        "sources": [
+          "synthetic:detection:network"
+        ],
+        "type": "unknown-management-interface"
+      },
+      {
+        "allowed_networks": [
+          "192.0.2.0/24"
+        ],
+        "allowed_ports": [
+          443
+        ],
+        "confidence": "medium",
+        "id": "network.exposure",
+        "investigation": "Confirm intended listener policy and assess reachability from the relevant authorized network vantage points.",
+        "severity": "medium",
+        "sources": [
+          "synthetic:detection:network"
+        ],
+        "type": "unexpected-network-exposure"
+      }
+    ],
+    "version": 1
+  },
+  "policy_observations": [
+    {
+      "id": "02:aa:bb:cc:00:02",
+      "kind": "wifi",
+      "name": "Atlas Lab",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "rssi": -50,
+      "scan_age_ms": 100,
+      "scan_freshness": "fresh",
+      "security": "WPA2",
+      "source": "synthetic:detection:wifi"
+    },
+    {
+      "advertisement_complete": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "name": "Synthetic beacon",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "rssi": -60,
+      "service_uuids": [
+        "180f",
+        "181a"
+      ],
+      "source": "synthetic:detection:ble"
+    },
+    {
+      "id": "192.0.2.55/tcp/22",
+      "ip": "192.0.2.55",
+      "kind": "service",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "port": 22,
+      "source": "synthetic:detection:network"
+    },
+    {
+      "id": "02:aa:bb:cc:00:01",
+      "kind": "wifi",
+      "name": "Atlas Lab",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "scan_age_ms": 100,
+      "scan_freshness": "fresh",
+      "security": "WPA3",
+      "source": "synthetic:detection:wifi"
+    },
+    {
+      "id": "192.0.2.5/tcp/443",
+      "ip": "192.0.2.5",
+      "kind": "service",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "port": 443,
+      "source": "synthetic:detection:network"
+    },
+    {
+      "id": "02:aa:bb:cc:00:03",
+      "kind": "wifi",
+      "name": "Atlas Lab",
+      "observed_at": "2026-04-17T10:00:00Z",
+      "scan_age_ms": 100,
+      "scan_freshness": "cached",
+      "security": "OPEN",
+      "source": "synthetic:detection:wifi"
+    },
+    {
+      "id": "02:aa:bb:cc:00:02",
+      "kind": "wifi",
+      "name": "Atlas Lab",
+      "observed_at": "2026-04-17T10:00:10Z",
+      "rssi": -50,
+      "scan_age_ms": 100,
+      "scan_freshness": "fresh",
+      "security": "WPA2",
+      "source": "synthetic:detection:wifi"
+    },
+    {
+      "advertisement_complete": true,
+      "evidence_confidence": "synthetic",
+      "id": "c2:11:22:33:44:01",
+      "kind": "ble",
+      "name": "Synthetic beacon",
+      "observed_at": "2026-04-17T10:00:10Z",
+      "rssi": -60,
+      "service_uuids": [
+        "180f",
+        "181a"
+      ],
+      "source": "synthetic:detection:ble"
+    },
+    {
+      "id": "192.0.2.55/tcp/22",
+      "ip": "192.0.2.55",
+      "kind": "service",
+      "observed_at": "2026-04-17T10:00:10Z",
+      "port": 22,
+      "source": "synthetic:detection:network"
+    },
+    {
+      "id": "02:aa:bb:cc:00:01",
+      "kind": "wifi",
+      "name": "Atlas Lab",
+      "observed_at": "2026-04-17T10:00:10Z",
+      "scan_age_ms": 100,
+      "scan_freshness": "fresh",
+      "security": "WPA3",
+      "source": "synthetic:detection:wifi"
+    },
+    {
+      "id": "192.0.2.5/tcp/443",
+      "ip": "192.0.2.5",
+      "kind": "service",
+      "observed_at": "2026-04-17T10:00:10Z",
+      "port": 443,
+      "source": "synthetic:detection:network"
+    },
+    {
+      "id": "02:aa:bb:cc:00:03",
+      "kind": "wifi",
+      "name": "Atlas Lab",
+      "observed_at": "2026-04-17T10:00:10Z",
+      "scan_age_ms": 100,
+      "scan_freshness": "cached",
+      "security": "OPEN",
+      "source": "synthetic:detection:wifi"
+    }
+  ],
+  "synthetic": true,
+  "wifi_evaluation": [
+    {
+      "channel": 36,
+      "frequency_mhz": 5180,
+      "id": "02:11:22:00:00:02",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -49,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "OPEN",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 11,
+      "frequency_mhz": 2462,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -57,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 36,
+      "frequency_mhz": 5180,
+      "id": "02:11:22:00:00:06",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -49,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 6,
+      "frequency_mhz": 2437,
+      "id": "02:11:22:00:00:07",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -38,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "OPEN",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 37,
+      "frequency_mhz": 6135,
+      "id": "02:11:22:00:00:08",
+      "kind": "wifi",
+      "name": "Neighbor-Lab",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -82,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:09:00Z",
+      "rssi": -57,
+      "scan_age_ms": 420,
+      "scan_freshness": "cached",
+      "security": "WEP",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:aa",
+      "kind": "wifi",
+      "name": "StalePhantom",
+      "observed_at": "2026-04-15T10:09:30Z",
+      "rssi": -57,
+      "scan_age_ms": 95000,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:09",
+      "kind": "wifi",
+      "name": "",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -57,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 5,
+      "frequency_mhz": 5975,
+      "id": "02:11:22:00:00:03",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -61,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "UNKNOWN",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 149,
+      "frequency_mhz": 5745,
+      "id": "02:11:22:00:00:05",
+      "kind": "wifi",
+      "name": "Printer-Service",
+      "observed_at": "2026-04-15T10:11:00Z",
+      "rssi": -66,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:12:00Z",
+      "rssi": -55,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 36,
+      "frequency_mhz": 5180,
+      "id": "02:11:22:00:00:02",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:10:00Z",
+      "rssi": -49,
+      "scan_age_ms": 800,
+      "scan_freshness": "fresh",
+      "security": "OPEN",
+      "source": "synthetic:android-wifi:office"
+    }
+  ],
+  "wifi_source": "synthetic:android-wifi:office",
+  "wifi_training": [
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:00:00Z",
+      "rssi": -57,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 36,
+      "frequency_mhz": 5180,
+      "id": "02:11:22:00:00:02",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:00:00Z",
+      "rssi": -49,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 5,
+      "frequency_mhz": 5975,
+      "id": "02:11:22:00:00:03",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:00:00Z",
+      "rssi": -61,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 6,
+      "frequency_mhz": 2437,
+      "id": "02:11:22:00:00:04",
+      "kind": "wifi",
+      "name": "CafeGuest",
+      "observed_at": "2026-04-15T10:00:00Z",
+      "rssi": -76,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "OPEN",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 149,
+      "frequency_mhz": 5745,
+      "id": "02:11:22:00:00:05",
+      "kind": "wifi",
+      "name": "Printer-Lab",
+      "observed_at": "2026-04-15T10:00:00Z",
+      "rssi": -66,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:01:00Z",
+      "rssi": -57,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 36,
+      "frequency_mhz": 5180,
+      "id": "02:11:22:00:00:02",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:01:00Z",
+      "rssi": -49,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 5,
+      "frequency_mhz": 5975,
+      "id": "02:11:22:00:00:03",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:01:00Z",
+      "rssi": -61,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 6,
+      "frequency_mhz": 2437,
+      "id": "02:11:22:00:00:04",
+      "kind": "wifi",
+      "name": "CafeGuest",
+      "observed_at": "2026-04-15T10:01:00Z",
+      "rssi": -76,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "OPEN",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 149,
+      "frequency_mhz": 5745,
+      "id": "02:11:22:00:00:05",
+      "kind": "wifi",
+      "name": "Printer-Lab",
+      "observed_at": "2026-04-15T10:01:00Z",
+      "rssi": -66,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:02:00Z",
+      "rssi": -57,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 36,
+      "frequency_mhz": 5180,
+      "id": "02:11:22:00:00:02",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:02:00Z",
+      "rssi": -49,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 5,
+      "frequency_mhz": 5975,
+      "id": "02:11:22:00:00:03",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:02:00Z",
+      "rssi": -61,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 6,
+      "frequency_mhz": 2437,
+      "id": "02:11:22:00:00:04",
+      "kind": "wifi",
+      "name": "CafeGuest",
+      "observed_at": "2026-04-15T10:02:00Z",
+      "rssi": -76,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "OPEN",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 149,
+      "frequency_mhz": 5745,
+      "id": "02:11:22:00:00:05",
+      "kind": "wifi",
+      "name": "Printer-Lab",
+      "observed_at": "2026-04-15T10:02:00Z",
+      "rssi": -66,
+      "scan_age_ms": 420,
+      "scan_freshness": "fresh",
+      "security": "WPA2",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:01:30Z",
+      "rssi": -57,
+      "scan_age_ms": 90000,
+      "scan_freshness": "fresh",
+      "security": "OPEN",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:01",
+      "kind": "wifi",
+      "name": "AtlasOffice",
+      "observed_at": "2026-04-15T10:00:00Z",
+      "rssi": -57,
+      "scan_age_ms": 1200,
+      "scan_freshness": "cached",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    },
+    {
+      "channel": 1,
+      "frequency_mhz": 2412,
+      "id": "02:11:22:00:00:99",
+      "kind": "wifi",
+      "name": "OldCache",
+      "observed_at": "2026-04-15T10:02:15Z",
+      "rssi": -57,
+      "scan_age_ms": 420,
+      "scan_freshness": "unknown",
+      "security": "WPA2 WPA3",
+      "source": "synthetic:android-wifi:office"
+    }
+  ]
+}

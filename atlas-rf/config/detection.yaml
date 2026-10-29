@@ -1,0 +1,49 @@
+# Example policy only: replace synthetic source labels and addresses with reviewed scope.
+version: 1
+defaults:
+  min_observations: 2
+  window_seconds: 300
+  max_age_seconds: 600
+  cooldown_seconds: 3600
+rules:
+  - id: wifi.security-downgrade
+    type: ap-security-downgrade
+    sources: [synthetic:detection:wifi]
+    ssid: Atlas Lab
+    expected_security: WPA3
+    severity: high
+    confidence: medium
+    investigation: Verify the AP configuration and negotiated security with the network owner.
+  - id: wifi.unrecognized-bssid
+    type: unrecognized-bssid
+    sources: [synthetic:detection:wifi]
+    ssid: Atlas Lab
+    approved_bssids: ['02:aa:bb:cc:00:01']
+    severity: medium
+    confidence: low
+    investigation: Compare the BSSID with the approved AP inventory and account for replacements or mesh nodes.
+  - id: ble.monitored-services
+    type: ble-service-change
+    sources: [synthetic:detection:ble]
+    address: 'c2:11:22:33:44:01'
+    evidence_kind: advertisement
+    expected_services: ['180f']
+    severity: medium
+    confidence: low
+    investigation: Check authorized service metadata and address rotation before attributing this to a device.
+  - id: network.management-interface
+    type: unknown-management-interface
+    sources: [synthetic:detection:network]
+    ports: [22, 23, 3389, 5900, 8443]
+    allowed_networks: [192.0.2.0/28]
+    severity: high
+    confidence: medium
+    investigation: Identify the responding service and check whether the endpoint is approved for management access.
+  - id: network.exposure
+    type: unexpected-network-exposure
+    sources: [synthetic:detection:network]
+    allowed_networks: [192.0.2.0/24]
+    allowed_ports: [443]
+    severity: medium
+    confidence: medium
+    investigation: Confirm intended listener policy and assess reachability from the relevant authorized network vantage points.

@@ -1,0 +1,29 @@
+{
+  "tests_run": 213,
+  "passed": 212,
+  "skipped": [
+    {
+      "test": "test_real_local_tcp_and_bounded_workers (test_atlas.ProbeTests.test_real_local_tcp_and_bounded_workers)",
+      "reason": "execution sandbox denies TCP socket creation; run on target Debian"
+    }
+  ],
+  "failures": 0,
+  "errors": 0,
+  "wall_seconds": 6.736440484999548,
+  "dashboard": {
+    "status": "PASSED",
+    "real_pty": true,
+    "states": [
+      "initial_all",
+      "wifi_findings",
+      "ble_observations",
+      "tcp_observations"
+    ],
+    "exit_code": 0,
+    "database_unchanged": true,
+    "transcript_bytes": 5989,
+    "transcript": "dashboard-pty.bin"
+  },
+  "all_discovered_tests_executed": true,
+  "pytest_required": false
+}

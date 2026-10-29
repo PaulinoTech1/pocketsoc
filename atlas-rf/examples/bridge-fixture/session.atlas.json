@@ -1,0 +1,19 @@
+{
+  "kind": "atlas-radio-export",
+  "schema_version": 1,
+  "complete": true,
+  "metadata": {
+    "session_id": "c9deed39-a7b1-4413-a9f6-281b75e25082",
+    "synthetic": true,
+    "rows": 4,
+    "bytes": 681,
+    "statuses": {
+      "session": "fixture_only"
+    },
+    "drops": {},
+    "queue_capacity": 256,
+    "fixture_description": "Synthetic records; not produced by Android hardware."
+  },
+  "sha256": "87bc96341dc3d16c723d8153b778f1872e062e4a204677b32482c91112e9f622",
+  "payload_jsonl": "{\"kind\":\"wifi\",\"id\":\"02:00:00:00:00:01\",\"observed_at\":\"2026-01-01T12:00:00Z\",\"source\":\"synthetic:android-bridge-fixture:wifi\",\"name\":\"ATLAS Lab\",\"security\":\"WPA2\",\"rssi\":-75}\n{\"kind\":\"wifi\",\"id\":\"02:00:00:00:00:01\",\"observed_at\":\"2026-01-01T12:01:00Z\",\"source\":\"synthetic:android-bridge-fixture:wifi\",\"name\":\"ATLAS Lab\",\"security\":\"OPEN\",\"rssi\":-40}\n{\"kind\":\"wifi\",\"id\":\"02:00:00:00:00:02\",\"observed_at\":\"2026-01-01T12:02:00Z\",\"source\":\"synthetic:android-bridge-fixture:wifi\",\"name\":\"ATLAS Lab\",\"security\":\"WPA2\",\"rssi\":-55}\n{\"kind\":\"ble\",\"id\":\"02:00:00:00:00:03\",\"observed_at\":\"2026-01-01T12:02:00Z\",\"source\":\"synthetic:android-bridge-fixture:ble\",\"name\":\"Lab Beacon\",\"rssi\":-65}\n"
+}

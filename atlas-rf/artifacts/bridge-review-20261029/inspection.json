@@ -1,0 +1,20 @@
+{
+  "architecture": "aarch64",
+  "shared_directory_listable": true,
+  "documents_listable": true,
+  "existing_document_byte_read": true,
+  "documents_writable_access_check": false,
+  "tools": {
+    "java": null,
+    "javac": null,
+    "gradle": null,
+    "kotlinc": null,
+    "sdkmanager": null,
+    "aapt2": null,
+    "apksigner": null,
+    "adb": null
+  },
+  "hardware_integration": "UNVERIFIED",
+  "android_produced_export_verified_and_ingested": false,
+  "unpaired_disabled_cellular_export": "real cellular exports require authenticated transport"
+}

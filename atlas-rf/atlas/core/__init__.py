@@ -1,0 +1,1 @@
+"""ATLAS RF core module."""

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atlas-rf"
+version = "0.2.0"
+description = "Portable wireless observation and authorized network assessment"
+requires-python = ">=3.11"
+dependencies = ["PyYAML>=6,<7"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+atlas = "atlas.cli:main"
+atlas-rf = "atlas_rf.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["atlas*", "atlas_rf*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.setuptools.package-data]
+atlas = ["fixtures/*.json"]

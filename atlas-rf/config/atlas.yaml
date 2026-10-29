@@ -1,0 +1,16 @@
+# Optional config: atlas --config config/atlas.yaml status
+# Omitted storage.path uses $XDG_DATA_HOME/atlas-rf/atlas.sqlite3.
+# Relative paths resolve against the YAML file's directory.
+storage:
+  report_limit: 2000
+  retention_days: 7 # explicit: atlas security retention [--apply]
+monitor:
+  interval_seconds: 2.0
+  max_rss_mb: 256
+  min_available_mb: 128
+  min_free_disk_mb: 64
+logging:
+  level: INFO
+  file: null
+bridge:
+  inbox: /mnt/shared/Documents/ATLAS-RF

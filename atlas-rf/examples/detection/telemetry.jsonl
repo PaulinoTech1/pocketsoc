@@ -1,0 +1,12 @@
+{"id": "02:aa:bb:cc:00:02", "kind": "wifi", "name": "Atlas Lab", "observed_at": "2026-04-17T10:00:00Z", "rssi": -50, "scan_age_ms": 100, "scan_freshness": "fresh", "security": "WPA2", "source": "synthetic:detection:wifi"}
+{"advertisement_complete": true, "evidence_confidence": "synthetic", "id": "c2:11:22:33:44:01", "kind": "ble", "name": "Synthetic beacon", "observed_at": "2026-04-17T10:00:00Z", "rssi": -60, "service_uuids": ["180f", "181a"], "source": "synthetic:detection:ble"}
+{"id": "192.0.2.55/tcp/22", "ip": "192.0.2.55", "kind": "service", "observed_at": "2026-04-17T10:00:00Z", "port": 22, "source": "synthetic:detection:network"}
+{"id": "02:aa:bb:cc:00:01", "kind": "wifi", "name": "Atlas Lab", "observed_at": "2026-04-17T10:00:00Z", "scan_age_ms": 100, "scan_freshness": "fresh", "security": "WPA3", "source": "synthetic:detection:wifi"}
+{"id": "192.0.2.5/tcp/443", "ip": "192.0.2.5", "kind": "service", "observed_at": "2026-04-17T10:00:00Z", "port": 443, "source": "synthetic:detection:network"}
+{"id": "02:aa:bb:cc:00:03", "kind": "wifi", "name": "Atlas Lab", "observed_at": "2026-04-17T10:00:00Z", "scan_age_ms": 100, "scan_freshness": "cached", "security": "OPEN", "source": "synthetic:detection:wifi"}
+{"id": "02:aa:bb:cc:00:02", "kind": "wifi", "name": "Atlas Lab", "observed_at": "2026-04-17T10:00:10Z", "rssi": -50, "scan_age_ms": 100, "scan_freshness": "fresh", "security": "WPA2", "source": "synthetic:detection:wifi"}
+{"advertisement_complete": true, "evidence_confidence": "synthetic", "id": "c2:11:22:33:44:01", "kind": "ble", "name": "Synthetic beacon", "observed_at": "2026-04-17T10:00:10Z", "rssi": -60, "service_uuids": ["180f", "181a"], "source": "synthetic:detection:ble"}
+{"id": "192.0.2.55/tcp/22", "ip": "192.0.2.55", "kind": "service", "observed_at": "2026-04-17T10:00:10Z", "port": 22, "source": "synthetic:detection:network"}
+{"id": "02:aa:bb:cc:00:01", "kind": "wifi", "name": "Atlas Lab", "observed_at": "2026-04-17T10:00:10Z", "scan_age_ms": 100, "scan_freshness": "fresh", "security": "WPA3", "source": "synthetic:detection:wifi"}
+{"id": "192.0.2.5/tcp/443", "ip": "192.0.2.5", "kind": "service", "observed_at": "2026-04-17T10:00:10Z", "port": 443, "source": "synthetic:detection:network"}
+{"id": "02:aa:bb:cc:00:03", "kind": "wifi", "name": "Atlas Lab", "observed_at": "2026-04-17T10:00:10Z", "scan_age_ms": 100, "scan_freshness": "cached", "security": "OPEN", "source": "synthetic:detection:wifi"}

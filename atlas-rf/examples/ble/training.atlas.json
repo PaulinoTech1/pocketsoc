@@ -1,0 +1,13 @@
+{
+  "kind": "atlas-radio-export",
+  "schema_version": 1,
+  "complete": true,
+  "metadata": {
+    "session_id": "00000000-0000-4000-8000-000000000010",
+    "synthetic": true,
+    "rows": 4,
+    "bytes": 1361
+  },
+  "sha256": "ae1e09afcd8846ee889e6a8162be1136d4a9eb93f399134b2d1e785bbd3d59dc",
+  "payload_jsonl": "{\"advertisement_complete\":true,\"advertisement_hex\":\"020106\",\"connectable\":true,\"evidence_confidence\":\"synthetic\",\"id\":\"02:aa:bb:cc:00:01\",\"kind\":\"ble\",\"manufacturer_data\":{\"65535\":\"0100\"},\"name\":\"Lab sensor\",\"observed_at\":\"2026-04-15T10:00:00Z\",\"rssi\":-55,\"service_uuids\":[\"180f\"],\"source\":\"synthetic:android-ble:lab\"}\n{\"advertisement_complete\":true,\"advertisement_hex\":\"020106\",\"connectable\":true,\"evidence_confidence\":\"synthetic\",\"id\":\"02:aa:bb:cc:00:01\",\"kind\":\"ble\",\"manufacturer_data\":{\"65535\":\"0100\"},\"name\":\"Lab sensor\",\"observed_at\":\"2026-04-15T10:00:01Z\",\"rssi\":-55,\"service_uuids\":[\"180f\"],\"source\":\"synthetic:android-ble:lab\"}\n{\"advertisement_complete\":true,\"advertisement_hex\":\"020106\",\"connectable\":true,\"evidence_confidence\":\"synthetic\",\"id\":\"02:aa:bb:cc:00:01\",\"kind\":\"ble\",\"manufacturer_data\":{\"65535\":\"0100\"},\"name\":\"Lab sensor\",\"observed_at\":\"2026-04-15T10:00:02Z\",\"rssi\":-55,\"service_uuids\":[\"180f\"],\"source\":\"synthetic:android-ble:lab\"}\n{\"authorization_id\":\"00000000-0000-4000-8000-000000000001\",\"evidence_confidence\":\"synthetic\",\"gatt_services\":[{\"characteristics\":[{\"properties\":2,\"uuid\":\"2a19\"}],\"uuid\":\"180f\"}],\"gatt_status\":\"complete\",\"id\":\"02:aa:bb:cc:00:01\",\"kind\":\"ble_gatt\",\"observed_at\":\"2026-04-15T10:00:03Z\",\"operation\":\"discover_services\",\"pairing_initiated\":false,\"source\":\"synthetic:android-ble:lab\",\"writes_performed\":false}\n"
+}

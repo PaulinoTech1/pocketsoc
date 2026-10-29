@@ -125,3 +125,17 @@ See the appended delimiter results in docs/performance.md for latency, throughpu
 `ai-context` exports a bounded verified case packet; `ai-review FILE` accepts only snapshot-bound selections of existing findings/events, fixed query IDs and explicitly unverified hypothesis kinds. It renders deterministic explanations, citations, selected timelines and missing-field counts. It executes no queries or commands and adds no inference/network dependency. Oversized cases fail explicitly; all ordinary PocketSOC functions remain available.
 
 A CPU-only quantized model is researched in [docs/ai-investigation.md](docs/ai-investigation.md), with protocol examples, limits, trust boundaries and a future benchmark procedure. **No language model or inference runner is installed/integrated.** Actual inference RAM, speed and model citation accuracy remain unmeasured. The implemented interchange has measured release resource/citation checks in [docs/performance.md](docs/performance.md).
+
+
+## ATLAS RF companion project
+
+[ATLAS RF](atlas-rf/README.md) is included under `atlas-rf/` as a separate Python/SQLite radio-observation analysis project, with optional Kotlin Android collector source. It is not yet integrated with PocketSOC's Rust runtime or database.
+
+- [Start ATLAS in Debian](atlas-rf/docs/debian-start.md)
+- [Desktop collector build handoff](atlas-rf/docs/desktop-handoff.md)
+- [Cellular bridge review and remaining blockers](atlas-rf/docs/cellular-bridge-review-20261029.md)
+- [Validation: 212 passed, one skipped; interactive dashboard passed](atlas-rf/artifacts/debian-working-validation-20261029/validation.json)
+
+The demo is synthetic. Android APK compilation/installation, live radio capture and verified phone-to-Debian telemetry remain incomplete. No Google developer account is required for ATLAS's Debian import/analysis/dashboard features. Device security settings must remain unchanged.
+
+For a fresh desktop checkout, follow ATLAS's installation guide to create its Python environment before using `atlas-rf/scripts/atlas`; the on-device `.venv`, generated demo database and user-level launcher are not bundled.
